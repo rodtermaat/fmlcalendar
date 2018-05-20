@@ -1,0 +1,61 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h2>.fml finanace .checkbook</h2>
+
+    <a href="{% url 'check-add' %}">add new</a>
+
+    {% if checks %}
+    <ul>
+
+      {% for check in checks %}
+      <li>
+        {{ check.date|date:'Y M d' }}:
+        <a href="{{ check.get_absolute_url }}"> {{ check.name }}</a> ({{check.amount}}) -
+        balance {{ check.balance }}
+        <a href="{% url 'check-delete' check.id %}">delete</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <table class="greyGridTable">
+      <thead>
+        <tr>
+          <th>date</th>
+          <th>cleared</th>
+          <th>name</th>
+          <th>category</th>
+          <th>amount</th>
+          <th>balance</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td>date</td>
+          <td>cleared</td>
+          <td>name</td>
+          <td>category</td>
+          <td>amount</td>
+          <td>balance</td>
+          <td></td>
+        </tr>
+      </tfoot>
+        {% for check in checks %}
+        <tr>
+          <td>{{ check.date|date:'Y M d' }}</td>
+          <td>{{check.cleared}}</td>
+          <td><a href="{{ check.get_absolute_url }}"> {{ check.name }}</a></td>
+          <td>{{check.category}}</td>
+          <td>{{check.amount}}</td>
+          <td>{{check.balance}}</td>
+          <td><a href="{% url 'check-delete' check.id %}">delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% else %}
+      <p>There are no checks in the checkbook.</p>
+    {% endif %}
+
+{% endblock %}
