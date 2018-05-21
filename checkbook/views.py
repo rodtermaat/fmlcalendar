@@ -37,34 +37,14 @@ def checkbookList(request):
     return render(request, 'checkbook.html', {'checks': checks})
 
 
-
 from django.views import generic
 
 class CheckListView(generic.ListView):
     model = Check
     paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        #context = super(CheckListView, self).get_context_data(**kwargs)
-        context = super().get_context_data(**kwargs)
-        context['balance'] = '12'
-        return context
-        print(context)
-        #balance = 0
-        #for chk in Check:
-        #    balance += chk.amount
-        #    chk.balance = balance
-        #    print (balance)
-
 class CheckDetailView(generic.DetailView):
     model = Check
-
-class CategoryListView(generic.ListView):
-    model = Category
-    paginate_by = 10
-
-class CategoryDetailView(generic.DetailView):
-    model = Category
 
 class CheckForm(forms.ModelForm):
     class Meta:
@@ -78,7 +58,6 @@ class CheckCreate(CreateView):
     form_class = CheckForm
     model = Check
     success_url = reverse_lazy('check-list')
-    #fields = ['date', 'type', 'category', 'name', 'amount', 'cleared']
 
 class CheckUpdate(UpdateView):
     model = Check
@@ -89,3 +68,34 @@ class CheckUpdate(UpdateView):
 class CheckDelete(DeleteView):
     model = Check
     success_url = reverse_lazy('check-list')
+
+# Category views
+# --------------------------------------------
+class CategoryListView(generic.ListView):
+    model = Category
+    paginate_by = 10
+
+class CategoryDetailView(generic.DetailView):
+    model = Category
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name', 'frequency', 'budget']
+
+class CategoryCreate(CreateView):
+    model = Category
+    form_class = CategoryForm
+    success_url = reverse_lazy('category-list')
+
+
+
+class CategoryUpdate(UpdateView):
+    model = Category
+    success_url = reverse_lazy('category-list')
+    fields = ['name', 'frequency', 'budget']
+    #template_name_suffix = '_update_form'
+
+class CategoryDelete(DeleteView):
+    model = Category
+    success_url = reverse_lazy('category-list')

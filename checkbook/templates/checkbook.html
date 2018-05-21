@@ -6,27 +6,16 @@
     <a href="{% url 'check-add' %}">add new</a>
 
     {% if checks %}
-    <ul>
-
-      {% for check in checks %}
-      <li>
-        {{ check.date|date:'Y M d' }}:
-        <a href="{{ check.get_absolute_url }}"> {{ check.name }}</a> ({{check.amount}}) -
-        balance {{ check.balance }}
-        <a href="{% url 'check-delete' check.id %}">delete</a>
-      </li>
-      {% endfor %}
-    </ul>
 
     <table class="greyGridTable">
       <thead>
         <tr>
           <th>date</th>
           <th>cleared</th>
-          <th>name</th>
+          <th>description</th>
           <th>category</th>
-          <th>amount</th>
-          <th>balance</th>
+          <th>amt</th>
+          <th>bal</th>
           <th></th>
         </tr>
       </thead>
@@ -34,10 +23,10 @@
         <tr>
           <td>date</td>
           <td>cleared</td>
-          <td>name</td>
+          <td>description</td>
           <td>category</td>
-          <td>amount</td>
-          <td>balance</td>
+          <td>amt</td>
+          <td>bal</td>
           <td></td>
         </tr>
       </tfoot>

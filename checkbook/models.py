@@ -12,16 +12,16 @@ class Check(models.Model):
         ('DR', 'debit'),
     )
     #theuser = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    date = models.DateField(help_text='Enter the date of the transaction')
-    type = models.CharField(max_length=2, choices=check_type, help_text='Enter credit or debit')
+    date = models.DateField(help_text=' .the date of the transaction')
+    type = models.CharField(max_length=2, choices=check_type, help_text=' .credit or debit')
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
     # Foreign Key used because a transaction can only have one category,
     # but categories can have multiple transactions
     # category as a string rather than object because it hasn't been
     # declared yet in the file.
-    name = models.CharField(max_length=100, help_text='Enter description')
-    amount = models.IntegerField(default=0, help_text='Enter amount')
-    cleared = models.BooleanField(default=False, help_text='Is transaction cleared with the bank?')
+    name = models.CharField(max_length=100, help_text=' .description')
+    amount = models.IntegerField(default=0, help_text=' .amount')
+    cleared = models.BooleanField(default=False, help_text=' .cleared with the bank?')
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:

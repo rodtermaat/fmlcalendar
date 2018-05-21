@@ -11,8 +11,7 @@
       {% for check in check_list %}
       <li>
         {{ check.date|date:'Y M d' }}:
-        <a href="{{ check.get_absolute_url }}"> {{ check.name }}</a> ({{check.amount}}) -
-        balance {{ check.balance }}
+        <a href="{{ check.get_absolute_url }}"> {{ check.name }}</a> ({{check.amount}})
         <a href="{% url 'check-delete' check.id %}">delete</a>
       </li>
       {% endfor %}

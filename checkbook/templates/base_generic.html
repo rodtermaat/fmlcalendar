@@ -2,19 +2,28 @@
 <html lang="en">
 <head>
 
-  {% block title %}<title>fml Finance</title>{% endblock %}
+  {% block title %}<title>.fml finance</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script>
+  $( function() {
+    $( "#id_date" ).datepicker();
+  } );
+  </script>
+
+
   <!-- Add additional CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <link type="text/css" href="{% static 'js/jquery-datepick/jquery-ui.css' %}" rel="Stylesheet" />
-  <script type="text/javascript" src="{% static 'js/jquery-datepick/external/jquery/jquery.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/jquery-datepick/jquery-ui.js' %}"></script>
+
 
 </head>
 
@@ -31,7 +40,7 @@
           <li><a href="">calendar</a></li>
           <li><a href="{% url 'check-list' %}">my checkbook</a></li>
           <li><a href="{% url 'checkbook' %}">the checkbook</a></li>
-          <li><a href="{% url 'categories' %}">categories</a></li>
+          <li><a href="{% url 'category-list' %}">categories</a></li>
           <hr></hr>
           {% if user.is_authenticated %}
             <li>you are: {{ user.get_username }}</li>
